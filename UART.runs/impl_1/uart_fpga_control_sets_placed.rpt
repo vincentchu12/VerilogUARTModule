@@ -1,0 +1,79 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Wed Jul 18 00:58:35 2018
+| Host         : LAPTOP-NT4QGV78 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file uart_fpga_control_sets_placed.rpt
+| Design       : uart_fpga
+| Device       : xc7a100t
+--------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    13 |
+| Unused register locations in slices containing registers |    36 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      6 |            1 |
+|     10 |            1 |
+|    16+ |           11 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             114 |           24 |
+| No           | No                    | Yes                    |              40 |           12 |
+| No           | Yes                   | No                     |              66 |           10 |
+| Yes          | No                    | No                     |              70 |           17 |
+| Yes          | No                    | Yes                    |              60 |           11 |
+| Yes          | Yes                   | No                     |              22 |            2 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------------+-----------------------------+-----------------------------+------------------+----------------+
+|     Clock Signal     |        Enable Signal        |       Set/Reset Signal      | Slice Load Count | Bel Load Count |
++----------------------+-----------------------------+-----------------------------+------------------+----------------+
+|  UART/TX/NS__0       |                             |                             |                2 |              6 |
+|  UART/RX/NS          |                             |                             |                2 |             10 |
+|  clk100MHz_IBUF_BUFG | UART/RX/count[9]_i_1_n_0    |                             |                4 |             20 |
+|  clk100MHz_IBUF_BUFG | UART/TX/NS__0               |                             |                6 |             20 |
+|  clk100MHz_IBUF_BUFG | UART/RX/rx_count[0]_i_2_n_0 | UART/RX/rx_count[0]_i_1_n_0 |                2 |             22 |
+| ~clk100MHz_IBUF_BUFG | UART/TX_FIFO/read_position0 | rst_IBUF                    |                4 |             22 |
+|  clk100MHz_IBUF_BUFG |                             |                             |                8 |             24 |
+|  clk100MHz_IBUF_BUFG | UART/TX/tx_bus[10]_i_1_n_0  |                             |                7 |             30 |
+| ~clk100MHz_IBUF_BUFG |                             | rst_IBUF                    |               10 |             36 |
+| ~clk100MHz_IBUF_BUFG | UART/RX_FIFO/read_position0 | rst_IBUF                    |                7 |             38 |
+|  clk100MHz_IBUF_BUFG |                             | rst_IBUF                    |               12 |             70 |
+|  clk_BUFG            |                             |                             |               12 |             74 |
+| ~clk100MHz_IBUF_BUFG |                             |                             |                8 |            128 |
++----------------------+-----------------------------+-----------------------------+------------------+----------------+
+
+
