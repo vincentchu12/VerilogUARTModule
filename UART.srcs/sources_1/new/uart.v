@@ -5,45 +5,48 @@
 module uart #(
         parameter BAUD_RATE = 9600,             // 9600 Baud Rate
         parameter CLOCK_HZ  = 100 * (10 ** 6),  // Assume 100MHz Clock,
-        parameter DATA_SIZE = 8,
-        parameter PARITY    = `NONE,
-        parameter STOP_SIZE = 1,
-        parameter TX_DEPTH  = 8,
-        parameter RX_DEPTH  = 8
+        parameter DATA_SIZE = 8,                // 5-8 Data Size
+        parameter PARITY    = `NONE,            // No Parity, Even Parity, Odd Parity
+        parameter STOP_SIZE = 1,                // Stop Size 1-2 Bits
+        parameter TX_DEPTH  = 8,                // Tx Fifo Depth
+        parameter RX_DEPTH  = 8                 // Rx Fifo Depth
     ) (
-        input  wire                 clk,       // Input Clock
-        input  wire                 rst,
-
-        input  wire                 tx_wr_cs,
-        input  wire                 tx_wr_en,
-        input  wire [DATA_SIZE-1:0] tx_data,   // 5-8 bit Data (Parallel)
-        output wire                 tx,        // Transmit Bit (Serial)        
-        output wire                 tx_full,
-        output wire                 tx_empty,
-
-        input  wire                 rx,        // Receive Bit (Serial)
-        input  wire                 rx_rd_cs,
-        input  wire                 rx_rd_en,
-        output wire [DATA_SIZE-1:0] rx_data,   // 5-8 bit Data (Parallel)
-        output wire                 rx_full,
-        output wire                 rx_empty
+        input  wire                 clk,        // Input Clock
+        input  wire                 rst,        // Reset
+        input  wire                 cs,         // Chip Select
+        input  wire                 we,         // Write Enable
+        input  wire                 oe,         // Output Enable
+        inout  wire [DATA_SIZE-1:0] data,       // 5-8 bit Data (Parallel)
+        input  wire                 rx,         // Receive Bit (Serial)
+        output wire                 tx,         // Transmit Bit (Serial)        
+        output wire                 tx_full,    // Tx Fifo Full Flag
+        output wire                 tx_empty,   // Tx Fifo Empty Flag
+        output wire                 rx_full,    // Rx Fifo Full Flag
+        output wire                 rx_empty    // Rx Fifo Empty Flag
     );
+
+
+    wire [DATA_SIZE-1:0] tx_data;
+    wire [DATA_SIZE-1:0] rx_data;
 
     wire [DATA_SIZE-1:0] tx_out;
     wire [DATA_SIZE-1:0] rx_in;
     wire                 tx_ready;  // Ready Flag
 
     wire                 rx_done;   // Done Flag
-    wire                 rx_error;   // Error Flag
+    wire                 rx_error;  // Error Flag
+
+    assign data = (cs && oe && !we) ? rx_data : {(DATA_SIZE){1'bz}};
+    assign tx_data = data;
 
     FIFO # (
-            .LENGTH(TX_DEPTH),
-            .WIDTH(DATA_SIZE)
+            .LENGTH     (TX_DEPTH),
+            .WIDTH      (DATA_SIZE)
         ) TX_FIFO (
             .clk        (~clk),
             .rst        (rst),
-            .wr_cs      (tx_wr_cs),
-            .wr_en      (tx_wr_en),
+            .wr_cs      (cs),
+            .wr_en      (we),
             .rd_cs      (tx_ready),
             .rd_en      (tx_ready),
             .in         (tx_data),
@@ -81,15 +84,15 @@ module uart #(
         );
 
     FIFO # (
-            .LENGTH(RX_DEPTH),
-            .WIDTH(DATA_SIZE)
+            .LENGTH     (RX_DEPTH),
+            .WIDTH      (DATA_SIZE)
         ) RX_FIFO (
             .clk        (~clk),
             .rst        (rst),
             .wr_cs      (rx_done),
             .wr_en      (rx_done),
-            .rd_cs      (rx_rd_cs),
-            .rd_en      (rx_rd_en),
+            .rd_cs      (cs),
+            .rd_en      (!we),
             .in         (rx_in),
             .full       (rx_full),
             .empty      (rx_empty),

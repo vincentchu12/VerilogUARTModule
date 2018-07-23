@@ -2,8 +2,8 @@
 # Vivado v2018.2 (64-bit)
 # SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
 # IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
-# Start of session at: Wed Jul 18 00:58:03 2018
-# Process ID: 14240
+# Start of session at: Tue Jul 24 19:36:25 2018
+# Process ID: 9632
 # Current directory: C:/Users/vcvin/Documents/UART/UART.runs/impl_1
 # Command line: vivado.exe -log uart_fpga.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source uart_fpga.tcl -notrace
 # Log file: C:/Users/vcvin/Documents/UART/UART.runs/impl_1/uart_fpga.vdi

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Wed Jul 18 00:59:08 2018
+| Date         : Tue Jul 24 19:37:55 2018
 | Host         : LAPTOP-NT4QGV78 running 64-bit major release  (build 9200)
 | Command      : report_drc -file uart_fpga_drc_routed.rpt -pb uart_fpga_drc_routed.pb -rpx uart_fpga_drc_routed.rpx
 | Design       : uart_fpga

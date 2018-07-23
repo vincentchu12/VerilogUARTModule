@@ -4,14 +4,4 @@ Running: C:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 47a00f323c
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
-Starting simulation data flow analysis
-WARNING: [XSIM 43-4100] "C:/Users/vcvin/Documents/UART/UART.sim/sim_1/behav/xsim/glbl.v" Line 6. Module glbl has a timescale but at least one module in design doesn't have timescale.
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling module xil_defaultlib.FIFO(LENGTH=8,WIDTH=8)
-Compiling module xil_defaultlib.uart_tx(CLOCK_HZ=100000000)
-Compiling module xil_defaultlib.uart_rx(CLOCK_HZ=100000000)
-Compiling module xil_defaultlib.uart
-Compiling module xil_defaultlib.tb_uart
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_uart_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

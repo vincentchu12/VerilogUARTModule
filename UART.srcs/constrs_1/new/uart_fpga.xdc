@@ -4,7 +4,6 @@ create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports {cl
 
 # Buttons
 set_property -dict {PACKAGE_PIN N17 IOSTANDARD LVCMOS33} [get_ports {rst}]; # Center Button
-set_property -dict {PACKAGE_PIN P17 IOSTANDARD LVCMOS33} [get_ports {read}]; # Left Button
 set_property -dict {PACKAGE_PIN M17 IOSTANDARD LVCMOS33} [get_ports {write}]; # Right Button
 
 

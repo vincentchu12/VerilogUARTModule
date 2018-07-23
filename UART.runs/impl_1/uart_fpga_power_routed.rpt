@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Wed Jul 18 00:59:10 2018
+| Date             : Tue Jul 24 19:37:58 2018
 | Host             : LAPTOP-NT4QGV78 running 64-bit major release  (build 9200)
 | Command          : report_power -file uart_fpga_power_routed.rpt -pb uart_fpga_power_summary_routed.pb -rpx uart_fpga_power_routed.rpx
 | Design           : uart_fpga
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.125        |
+| Total On-Chip Power (W)  | 0.123        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.028        |
+| Dynamic (W)              | 0.026        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.4         |
@@ -52,19 +52,17 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.002 |        3 |       --- |             --- |
-| Slice Logic              |    <0.001 |      476 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |      170 |     63400 |            0.27 |
+| Clocks                   |     0.001 |        3 |       --- |             --- |
+| Slice Logic              |    <0.001 |      466 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |      189 |     63400 |            0.30 |
 |   LUT as Distributed RAM |    <0.001 |       32 |     19000 |            0.17 |
-|   Register               |    <0.001 |      186 |    126800 |            0.15 |
+|   Register               |    <0.001 |      158 |    126800 |            0.12 |
 |   CARRY4                 |    <0.001 |        8 |     15850 |            0.05 |
-|   F7/F8 Muxes            |    <0.001 |        7 |     63400 |            0.01 |
-|   Others                 |     0.000 |       21 |       --- |             --- |
-|   BUFG                   |     0.000 |        1 |        32 |            3.13 |
-| Signals                  |    <0.001 |      339 |       --- |             --- |
-| I/O                      |     0.025 |       42 |       210 |           20.00 |
+|   Others                 |     0.000 |       20 |       --- |             --- |
+| Signals                  |     0.001 |      335 |       --- |             --- |
+| I/O                      |     0.023 |       41 |       210 |           19.52 |
 | Static Power             |     0.097 |          |           |                 |
-| Total                    |     0.125 |          |           |                 |
+| Total                    |     0.123 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -76,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Vccint    |       1.000 |     0.018 |       0.003 |      0.015 |
 | Vccaux    |       1.800 |     0.019 |       0.001 |      0.018 |
-| Vcco33    |       3.300 |     0.011 |       0.007 |      0.004 |
+| Vcco33    |       3.300 |     0.010 |       0.006 |      0.004 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -143,10 +141,9 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| uart_fpga                |     0.028 |
+| uart_fpga                |     0.026 |
 |   CLK_GEN                |    <0.001 |
 |   LED_MUX                |    <0.001 |
-|   READ                   |     0.000 |
 |   UART                   |     0.002 |
 |     RX                   |    <0.001 |
 |     RX_FIFO              |    <0.001 |
@@ -160,7 +157,7 @@ Table of Contents
 |       mem_reg_r1_0_7_6_7 |    <0.001 |
 |       mem_reg_r2_0_7_0_5 |    <0.001 |
 |       mem_reg_r2_0_7_6_7 |    <0.001 |
-|   WRITE                  |     0.000 |
+|   WRITE                  |    <0.001 |
 +--------------------------+-----------+
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1531900642">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1532486114">
   <File Type="PA-TCL" Name="uart_fpga.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="uart_fpga_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="uart_fpga_reports.tcl"/>

@@ -6,7 +6,6 @@
 module uart_fpga (
         input  wire        clk100MHz,
         input  wire        rst,
-        input  wire        read,
         input  wire        write,
         input  wire [7:0]  tx_data,
         input  wire        rx,
@@ -25,23 +24,19 @@ module uart_fpga (
     wire clk_4sec;
     wire clk_5KHz;
 
-    wire tx_wr_en;
-    wire rx_rd_en;
+    wire [7:0] data;
 
     wire [7:0] LED[1:0];
     
-    reg write_reg;
-    reg read_reg;
+    wire write_button;
+    reg  write_reg; 
+    wire write_pulse = write_button & ~write_reg;
     
-    wire write_pulse = tx_wr_en & ~write_reg;
-    wire read_pulse  = rx_rd_en & ~read_reg;
-    
+    assign data = (write_pulse) ? tx_data : 8'bz;
+
     always @ (posedge clk100MHz, posedge rst) begin
         if (rst) write_reg <= 1'b0;
-        else     write_reg <= tx_wr_en;
-        
-        if (rst) read_reg <= 1'b0;
-        else     read_reg <= rx_rd_en;
+        else     write_reg <= write_button;
     end
 
     clk_gen CLK_GEN (
@@ -50,6 +45,8 @@ module uart_fpga (
             .clk_4sec               (clk_4sec),
             .clk_5KHz               (clk_5KHz)
         );
+
+
 
     uart #(
             .BAUD_RATE              (115200),            // 115200 Baud Rate
@@ -62,16 +59,14 @@ module uart_fpga (
         ) UART (
             .clk                    (clk100MHz),
             .rst                    (rst),
-            .tx_wr_cs               (`ENABLE),
-            .tx_wr_en               (write_pulse),
-            .tx_data                (tx_data),
+            .cs                     (`ENABLE),
+            .we                     (write_pulse),
+            .data                   (data),
             .tx                     (tx),
+            .rx                     (rx),
+            .oe                     (1'b1),
             .tx_full                (tx_full),
             .tx_empty               (tx_empty),
-            .rx                     (rx),
-            .rx_rd_cs               (`ENABLE),
-            .rx_rd_en               (read_pulse),
-            .rx_data                (rx_data),
             .rx_full                (rx_full),
             .rx_empty               (rx_empty)
         );
@@ -79,22 +74,16 @@ module uart_fpga (
     button_debouncer WRITE (
             .clk                    (clk_5KHz),
             .button                 (write),
-            .debounced_button       (tx_wr_en)
-        );
-
-    button_debouncer READ (
-            .clk                    (clk_5KHz),
-            .button                 (read),
-            .debounced_button       (rx_rd_en)
+            .debounced_button       (write_button)
         );
 
     hex_to_7seg HEX1 (
-            .HEX                    (rx_data[7:4]),
+            .HEX                    (data[7:4]),
             .s                      (LED[1])
         );
 
     hex_to_7seg HEX0 (
-            .HEX                    (rx_data[3:0]),
+            .HEX                    (data[3:0]),
             .s                      (LED[0])
         );
 
